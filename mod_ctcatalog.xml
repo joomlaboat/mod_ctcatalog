@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<extension type="module" version="3.0.0" client="site"  method="upgrade">
+    <name>Custom Tables - Catalog</name>
+    <author>Ivan komlev</author>
+    <creationDate>July 2018</creationDate>
+    <copyright>Copyright (C) 2010-2018 Ivan Komlev. All rights reserved.</copyright>
+    <license>GNU General Public License</license>
+    <authorEmail>support@joomlaboat.com</authorEmail>
+    <authorUrl>http://www.joomlaboat.com/</authorUrl>
+    <version>1.0.0</version>
+    <description>A module to show catalog component in as a module</description>
+    <files>
+        <filename module="mod_ctcatalog">mod_ctcatalog.php</filename>
+    </files>
+	
+  	<config>
+	<fields name="params" addfieldpath="/components/com_customtables/fields">
+		<fieldset name="basic" addfieldpath="components/com_customtables/fields/">
+
+			<field type="estable" name="establename" default="" label="Select Table" description="Select Listing Table" />
+			<field type="escataloglayout" name="ct_pagelayout" default="" label="Page Layout" description="Select Page Layout" />
+			<field type="esitemlayout" name="ct_itemlayout" default="" label="Item Layout" description="Select Item Layout" />
+
+		</fieldset>
+        <fieldset name="filter" addfieldpath="components/com_customtables/fields/">
+            
+            <field type="text" name="filter" default="" label="Search Parameter" 
+				description="
+			
+		field to search in = (or &#60; or &#60;= or &#62; or &#62;= or !=) 
+		value (or special macro as {currentuserid} for example ) to have more then one equation use AND, OR
+		to get value from url query add '$get_' to parameter name, example 'username=$get_user' this will read value 'user' from url query.
+" />
+            
+            <field type="list" name="showpublished" default="0" label="Show published" description="" class="btn-group btn-group" >
+		                <option value="0">Show Published Only</option>
+				<option value="1">Show Unpublished Only</option>
+				<option value="2">Show Any</option>
+			</field>
+            
+            <field type="text" name="limit" default="0" label="Record Limit" description="Limit, to show Number of first(last) record." />
+			<field type="text" name="sortby" default="" label="Order By" description="Order by field, example 1:  'title',  example 2: 'price desc'" />
+        </fieldset>
+        
+        <fieldset name="optional" addfieldpath="components/com_customtables/fields/">
+            
+            <field type="radio" name="allowcontentplugins" default="0" label="Allow Content Plugins" description="" class="btn-group btn-group-yesno">
+		                <option value="1">Yes</option>
+				<option value="0">No</option>
+			</field>
+            
+            <field type="text" name="menuitem" default="" label="Force Menu Item" description="" />
+        </fieldset>
+        
+        <fieldset name="shoppingcart" addfieldpath="components/com_customtables/fields/">
+            
+            <field type="list" name="showcartitemsonly" default="0" label="Shoping Cart Only" description="Show Items in the Shoping Cart Only" class="btn-group btn-group-yesno">
+                <option value="1">Yes</option>
+				<option value="0">No</option>
+			</field>
+            
+            <field type="text" name="showcartitemsprefix" default="" size="50" label="Shopping Cart Prefix" description="" />			
+			
+			<field type="text" name="cart_returnto" default="" size="50" label="Cart Updated Return To" description="" />
+			<field type="text" name="cart_msgitemadded" default="" size="50" label="Message: Cart: Item Added" description="" />
+			<field type="text" name="cart_msgitemdeleted" default="" size="50" label="Message: Cart: Item Deleted" description="" />
+			<field type="text" name="cart_msgitemupdated" default="" size="50" label="Message: Cart: Updated" description="" />
+            
+        </fieldset>
+	</fields>
+	</config>
+</extension>
+		
+
