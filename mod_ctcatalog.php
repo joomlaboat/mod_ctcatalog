@@ -11,17 +11,21 @@
  // no direct access
 defined('_JEXEC') or die('Restricted access');
     
-require_once('components'.DIRECTORY_SEPARATOR.'com_customtables'.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR.'catalog.php');
-require_once(JPATH_SITE.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_customtables'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'layout.php');
-require_once(JPATH_SITE.DIRECTORY_SEPARATOR.'administrator'.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_customtables'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'layouts.php');
+$site_path=JPATH_SITE.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_customtables'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR;
+$admin_path=JPATH_SITE.DIRECTORY_SEPARATOR.'administrator'.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_customtables'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR;
+	
+require_once(JPATH_SITE.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_customtables'.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR.'catalog.php');
+require_once($site_path.'layout.php');
+require_once($admin_path.'layouts.php');
+require_once($admin_path.'misc.php');
 
-require_once(JPATH_SITE.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_customtables'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'tagprocessor'.DIRECTORY_SEPARATOR.'catalogtag.php');
-require_once(JPATH_SITE.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_customtables'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'tagprocessor'.DIRECTORY_SEPARATOR.'catalogtableviewtag.php');
+require_once($site_path.'tagprocessor'.DIRECTORY_SEPARATOR.'catalogtag.php');
+require_once($site_path.'tagprocessor'.DIRECTORY_SEPARATOR.'catalogtableviewtag.php');
 
-require_once(JPATH_SITE.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_customtables'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'tagprocessor'.DIRECTORY_SEPARATOR.'generaltags.php');
-require_once(JPATH_SITE.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_customtables'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'tagprocessor'.DIRECTORY_SEPARATOR.'pagetags.php');
-require_once(JPATH_SITE.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_customtables'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'tagprocessor'.DIRECTORY_SEPARATOR.'itemtags.php');
-require_once(JPATH_SITE.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_customtables'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'tagprocessor'.DIRECTORY_SEPARATOR.'fieldtags.php');
+require_once($site_path.'tagprocessor'.DIRECTORY_SEPARATOR.'generaltags.php');
+require_once($site_path.'tagprocessor'.DIRECTORY_SEPARATOR.'pagetags.php');
+require_once($site_path.'tagprocessor'.DIRECTORY_SEPARATOR.'itemtags.php');
+require_once($site_path.'tagprocessor'.DIRECTORY_SEPARATOR.'fieldtags.php');
 
 
 		$jinput=JFactory::getApplication()->input;
@@ -29,7 +33,7 @@ require_once(JPATH_SITE.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'co
 		$result='';
 
 		$_params= $params;//new JRegistry;
-		ctModule_prepare_filter($_params);
+		JoomlaBasicMisc::prepareSearchFilter($_params);
 		
 		$config=array();
 		$model = JModelLegacy::getInstance('Catalog', 'CustomTablesModel', $config);
@@ -64,33 +68,3 @@ require_once(JPATH_SITE.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'co
 		
 		echo $pagelayout;
 
-
-function ctModule_prepare_filter(&$_params)
-{
-	if(isset($_params['filter']) and $_params['filter']!="")
-	{
-		$jinput=JFactory::getApplication()->input;
-		
-		$f=str_replace('$now','{now}',$_params['filter']);
-		$f=str_replace('$year',date('Y'),$f);
-			
-
-		$newf=array();
-		$p=explode(' ',$f);
-		foreach($p as $a)
-		{
-			if(strpos($a,'$get_')!==false)
-			{
-				$z=explode('$get_',$a);
-				$sp=explode('|',$z[1]);//$get_param|
-				$v=(string)preg_replace('/[^A-Z0-9_\.,-]/i', '', $jinput->getString($sp[0]));
-				$newf[]=str_replace('$get_'.$sp[0],$v,$a);
-			}
-			else
-				$newf[]=$a;
-		}
-		$f=implode(' ',$newf);
-
-		$_params['filter']=str_replace('|',',',$f);
-	}
-}
