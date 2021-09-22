@@ -10,12 +10,13 @@
 defined('_JEXEC') or die('Restricted access');
     
 $site_path=JPATH_SITE.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_customtables'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR;
-$admin_path=JPATH_SITE.DIRECTORY_SEPARATOR.'administrator'.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_customtables'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR;
-	
+
+$path=JPATH_SITE.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_customtables'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR.'customtables'.DIRECTORY_SEPARATOR;
+require_once($path.'loader.php');
+CTLoader();
+
 require_once(JPATH_SITE.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_customtables'.DIRECTORY_SEPARATOR.'models'.DIRECTORY_SEPARATOR.'catalog.php');
 require_once($site_path.'layout.php');
-require_once($admin_path.'layouts.php');
-require_once($admin_path.'misc.php');
 
 require_once($site_path.'tagprocessor'.DIRECTORY_SEPARATOR.'catalogtag.php');
 require_once($site_path.'tagprocessor'.DIRECTORY_SEPARATOR.'catalogtableviewtag.php');
