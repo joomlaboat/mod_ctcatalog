@@ -8,6 +8,14 @@
 
  // no direct access
 defined('_JEXEC') or die('Restricted access');
+
+use CustomTables\Layouts;
+
+$path = JPATH_SITE . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_customtables' 
+	. DIRECTORY_SEPARATOR . 'libraries' . DIRECTORY_SEPARATOR . 'customtables' . DIRECTORY_SEPARATOR;
+
+require_once($path.'loader.php');
+CTLoader();
     
 $site_path=JPATH_SITE.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.'com_customtables'.DIRECTORY_SEPARATOR.'libraries'.DIRECTORY_SEPARATOR;
 
@@ -40,11 +48,11 @@ require_once($site_path.'tagprocessor'.DIRECTORY_SEPARATOR.'fieldtags.php');
 		$model->showpagination=0;
 		
 		$type=0;
-		$pagelayout=ESLayouts::getLayout($params->get( 'ct_pagelayout' ),$type);
+		$pagelayout=Layouts::getLayout($params->get( 'ct_pagelayout' ),$type);
 		if($pagelayout=='')
 			$pagelayout='{catalog:,notable}';
 		
-		$itemlayout=ESLayouts::getLayout($params->get( 'ct_itemlayout' ),$type);
+		$itemlayout=Layouts::getLayout($params->get( 'ct_itemlayout' ),$type);
 		
 		
 		$SearchResult=$model->getSearchResult();
