@@ -9,6 +9,7 @@
  // no direct access
 defined('_JEXEC') or die('Restricted access');
 
+use CustomTables\CT;
 use CustomTables\Layouts;
 
 $path = JPATH_SITE . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_customtables' 
@@ -47,12 +48,14 @@ require_once($site_path.'tagprocessor'.DIRECTORY_SEPARATOR.'fieldtags.php');
 		$model->load($_params, true);
 		$model->showpagination=0;
 		
-		$type=0;
-		$pagelayout=Layouts::getLayout($params->get( 'ct_pagelayout' ),$type);
+		$ct = new CT;
+		$Layouts = new Layouts($ct);
+
+		$pagelayout=$Layouts->getLayout($params->get( 'ct_pagelayout' ));
 		if($pagelayout=='')
 			$pagelayout='{catalog:,notable}';
 		
-		$itemlayout=Layouts::getLayout($params->get( 'ct_itemlayout' ),$type);
+		$itemlayout=$Layouts->getLayout($params->get( 'ct_itemlayout' ));
 		
 		
 		$SearchResult=$model->getSearchResult();
