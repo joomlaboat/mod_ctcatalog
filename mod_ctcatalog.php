@@ -48,12 +48,16 @@ require_once($site_path.'tagprocessor'.DIRECTORY_SEPARATOR.'fieldtags.php');
 		$model->load($_params, true);
 		$model->showpagination=0;
 		
-		$ct = new CT;
-		$Layouts = new Layouts($ct);
-
-		$pagelayout=$Layouts->getLayout($params->get( 'ct_pagelayout' ));
-		if($pagelayout=='')
-			$pagelayout='{catalog:,notable}';
+		$pagelayout='{catalog:,notable}';
+		
+		if($params->get( 'ct_pagelayout' )!=null)
+		{
+			$ct = new CT;
+			$Layouts = new Layouts($ct);
+			$pagelayout=$Layouts->getLayout($params->get( 'ct_pagelayout' ));
+			if($pagelayout=='')
+				$pagelayout='{catalog:,notable}';
+		}
 		
 		$itemlayout=$Layouts->getLayout($params->get( 'ct_itemlayout' ));
 		
