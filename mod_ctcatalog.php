@@ -50,17 +50,20 @@ require_once($site_path.'tagprocessor'.DIRECTORY_SEPARATOR.'fieldtags.php');
 		
 		$pagelayout='{catalog:,notable}';
 		
+		$ct = new CT;
+			$Layouts = new Layouts($ct);
+		
 		if($params->get( 'ct_pagelayout' )!=null)
 		{
-			$ct = new CT;
-			$Layouts = new Layouts($ct);
 			$pagelayout=$Layouts->getLayout($params->get( 'ct_pagelayout' ));
 			if($pagelayout=='')
 				$pagelayout='{catalog:,notable}';
 		}
 		
-		$itemlayout=$Layouts->getLayout($params->get( 'ct_itemlayout' ));
-		
+		if($params->get( 'ct_itemlayout' )!=null)
+			$itemlayout=$Layouts->getLayout($params->get( 'ct_itemlayout' ));
+		else
+			$itemlayout='';
 		
 		$SearchResult=$model->getSearchResult();
 		$catalogtablecode=JoomlaBasicMisc::generateRandomString();//this is temporary replace place holder. to not parse content result again
