@@ -35,53 +35,49 @@ require_once($site_path.'tagprocessor'.DIRECTORY_SEPARATOR.'pagetags.php');
 require_once($site_path.'tagprocessor'.DIRECTORY_SEPARATOR.'itemtags.php');
 require_once($site_path.'tagprocessor'.DIRECTORY_SEPARATOR.'fieldtags.php');
 
+$jinput=JFactory::getApplication()->input;
 
-		$jinput=JFactory::getApplication()->input;
+$result='';
 
-		$result='';
-
-		$_params= $params;//new JRegistry;
-		JoomlaBasicMisc::prepareSearchFilter($_params);
+$_params= $params;//new JRegistry;
+JoomlaBasicMisc::prepareSearchFilter($_params);
 		
-		$config=array();
-		$model = JModelLegacy::getInstance('Catalog', 'CustomTablesModel', $config);
-		$model->load($_params, true);
-		$model->showpagination=0;
+$config=array();
+$model = JModelLegacy::getInstance('Catalog', 'CustomTablesModel', $config);
+$model->load($_params, true);
 		
+$pagelayout='{catalog:,notable}';
+		
+$Layouts = new Layouts($model->ct);
+		
+if($params->get( 'ct_pagelayout' )!=null)
+{
+	$pagelayout=$Layouts->getLayout($params->get( 'ct_pagelayout' ));
+	if($pagelayout=='')
 		$pagelayout='{catalog:,notable}';
+}
+	
+if($params->get( 'ct_itemlayout' )!=null)
+	$itemlayout=$Layouts->getLayout($params->get( 'ct_itemlayout' ));
+else
+	$itemlayout='';
 		
-		$ct = new CT;
-			$Layouts = new Layouts($ct);
-		
-		if($params->get( 'ct_pagelayout' )!=null)
-		{
-			$pagelayout=$Layouts->getLayout($params->get( 'ct_pagelayout' ));
-			if($pagelayout=='')
-				$pagelayout='{catalog:,notable}';
-		}
-		
-		if($params->get( 'ct_itemlayout' )!=null)
-			$itemlayout=$Layouts->getLayout($params->get( 'ct_itemlayout' ));
-		else
-			$itemlayout='';
-		
-		$SearchResult=$model->getSearchResult();
-		$catalogtablecode=JoomlaBasicMisc::generateRandomString();//this is temporary replace place holder. to not parse content result again
+$model->getSearchResult();
+$catalogtablecode=JoomlaBasicMisc::generateRandomString();//this is temporary replace place holder. to not parse content result again
 
-		$catalogtablecontent=tagProcessor_CatalogTableView::process($model,$pagelayout,$SearchResult,$catalogtablecode);
-		if($catalogtablecontent=='')
-		{
-		    $model->LayoutProc->layout=$itemlayout;
-			$catalogtablecontent=tagProcessor_Catalog::process($model,$pagelayout,$SearchResult,$catalogtablecode);
-		}
+$catalogtablecontent=tagProcessor_CatalogTableView::process($ct,$pagelayout,$catalogtablecode);
+if($catalogtablecontent=='')
+{
+    $model->ct->LayoutProc->layout=$itemlayout;
+	$catalogtablecontent=tagProcessor_Catalog::process($model->ct,$pagelayout,$catalogtablecode);
+}
 
-		$model->LayoutProc->layout=$pagelayout;
-		$pagelayout=$model->LayoutProc->fillLayout(array(), null, '');
-		$pagelayout=str_replace('&&&&quote&&&&','"',$pagelayout); // search boxes may return HTMl elemnts that contain placeholders with quotes like this: &&&&quote&&&&
-		$pagelayout=str_replace($catalogtablecode,$catalogtablecontent,$pagelayout);
+$model->ct->LayoutProc->layout=$pagelayout;
+$pagelayout=$model->ct->LayoutProc->fillLayout(array(), null, '');
+$pagelayout=str_replace('&&&&quote&&&&','"',$pagelayout); // search boxes may return HTMl elemnts that contain placeholders with quotes like this: &&&&quote&&&&
+$pagelayout=str_replace($catalogtablecode,$catalogtablecontent,$pagelayout);
 
-		if($params->get( 'allowcontentplugins' )==1)
-			LayoutProcessor::applyContentPlugins($pagelayout);
+if($params->get( 'allowcontentplugins' )==1)
+	LayoutProcessor::applyContentPlugins($pagelayout);
 		
-		echo $pagelayout;
-
+echo $pagelayout;
