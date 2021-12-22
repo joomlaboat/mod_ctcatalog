@@ -65,7 +65,7 @@ else
 $model->getSearchResult();
 $catalogtablecode=JoomlaBasicMisc::generateRandomString();//this is temporary replace place holder. to not parse content result again
 
-$catalogtablecontent=tagProcessor_CatalogTableView::process($ct,$pagelayout,$catalogtablecode);
+$catalogtablecontent=tagProcessor_CatalogTableView::process($model->ct,$pagelayout,$catalogtablecode);
 if($catalogtablecontent=='')
 {
     $model->ct->LayoutProc->layout=$itemlayout;
