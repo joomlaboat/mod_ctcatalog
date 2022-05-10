@@ -68,16 +68,17 @@ $catalogtablecode=JoomlaBasicMisc::generateRandomString();//this is temporary re
 $catalogtablecontent=tagProcessor_CatalogTableView::process($model->ct,$pagelayout,$catalogtablecode);
 if($catalogtablecontent=='')
 {
-    $model->ct->LayoutProc->layout=$itemlayout;
+	$LayoutProc = new LayoutProcessor($model->ct);
+    $LayoutProc->layout=$itemlayout;
 	$catalogtablecontent=tagProcessor_Catalog::process($model->ct,$pagelayout,$catalogtablecode);
 }
 
-$model->ct->LayoutProc->layout=$pagelayout;
-$pagelayout=$model->ct->LayoutProc->fillLayout(array(), null, '');
+$LayoutProc->layout=$pagelayout;
+$pagelayout=$LayoutProc->fillLayout(array(), null, '');
 $pagelayout=str_replace('&&&&quote&&&&','"',$pagelayout); // search boxes may return HTMl elemnts that contain placeholders with quotes like this: &&&&quote&&&&
 $pagelayout=str_replace($catalogtablecode,$catalogtablecontent,$pagelayout);
 
 if($params->get( 'allowcontentplugins' )==1)
-	LayoutProcessor::applyContentPlugins($pagelayout);
+	JoomlaBasicMisc::applyContentPlugins($pagelayout);
 		
 echo $pagelayout;
