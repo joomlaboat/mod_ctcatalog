@@ -3,12 +3,12 @@
 <extension type="module" version="3.0.0" client="site"  method="upgrade">
     <name>Custom Tables - Catalog</name>
     <author>Ivan komlev</author>
-    <creationDate>may 2022</creationDate>
+    <creationDate>May 2022</creationDate>
     <copyright>Copyright (C) 2018-2022 Ivan Komlev. All rights reserved.</copyright>
     <license>GNU General Public License</license>
     <authorEmail>support@joomlaboat.com</authorEmail>
     <authorUrl>http://www.joomlaboat.com/</authorUrl>
-    <version>2.7.1</version>
+    <version>2.7.4</version>
     <description>A module to show catalog component in as a module</description>
     <files>
         <filename module="mod_ctcatalog">mod_ctcatalog.php</filename>
@@ -73,7 +73,21 @@
 
 
 	<languages>
-        <language tag="en-GB">en-GB.mod_ctcatalog.ini</language>
+        <language tag="cs-CZ">cs-CZ.mod_ctcatalog.ini</language>
+		<language tag="de-DE">de-DE.mod_ctcatalog.ini</language>
+		<language tag="de-LU">de-LU.mod_ctcatalog.ini</language>
+		<language tag="el-GR">el-GR.mod_ctcatalog.ini</language>
+		<language tag="en-GB">en-GB.mod_ctcatalog.ini</language>
+		<language tag="es-ES">es-ES.mod_ctcatalog.ini</language>
+		<language tag="fr-FR">fr-FR.mod_ctcatalog.ini</language>
+		<language tag="it-IT">it-IT.mod_ctcatalog.ini</language>
+		<language tag="nl-NL">nl-NL.mod_ctcatalog.ini</language>
+		<language tag="pt-BR">pt-BR.mod_ctcatalog.ini</language>
+		<language tag="pt-PT">pt-PT.mod_ctcatalog.ini</language>
+		<language tag="ru-RU">ru-RU.mod_ctcatalog.ini</language>
+		<language tag="sk-SK">sk-SK.mod_ctcatalog.ini</language>
+		<language tag="sl-SI">sl-SI.mod_ctcatalog.ini</language>
+		<language tag="uk-UA">uk-UA.mod_ctcatalog.ini</language>
     </languages>
 
 </extension>
