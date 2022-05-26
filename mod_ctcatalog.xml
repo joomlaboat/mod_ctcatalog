@@ -8,7 +8,7 @@
     <license>GNU General Public License</license>
     <authorEmail>support@joomlaboat.com</authorEmail>
     <authorUrl>http://www.joomlaboat.com/</authorUrl>
-    <version>2.7.4</version>
+    <version>2.7.6</version>
     <description>A module to show catalog component in as a module</description>
     <files>
         <filename module="mod_ctcatalog">mod_ctcatalog.php</filename>
@@ -21,6 +21,8 @@
 			<field type="estable" name="establename" default="" label="Select Table" description="Select Listing Table" />
 			<field type="escataloglayout" name="ct_pagelayout" default="" label="Page Layout" description="Select Page Layout" />
 			<field type="esitemlayout" name="ct_itemlayout" default="" label="Item Layout" description="Select Item Layout" />
+			<field type="esdetailslayout" name="esdetailslayout" default="" label="Details Layout"
+			                   description="Select Record Details Layout"/>
 
 		</fieldset>
         <fieldset name="filter" addfieldpath="components/com_customtables/fields/">
@@ -41,6 +43,102 @@
             
             <field type="text" name="limit" default="0" label="Record Limit" description="Limit, to show Number of first(last) record." />
 			<field type="text" name="sortby" default="" label="Order By" description="Order by field, example 1:  'title',  example 2: 'price desc'" />
+        </fieldset>
+
+<fieldset name="EDITFORM">
+
+            <field name="addusergroups" type="CTUserGroup" default="8" label="Who may add content"
+                   description="Select a user group that may add the records."/>
+            <field name="editusergroups" type="CTUserGroup" default="8" label="Who may edit content"
+                   description="Select a user group that may edit records."/>
+            <field name="publishusergroups" type="CTUserGroup" default="8" label="Who may publish records"
+                   description="Select a user group that may publish/unpublish records."/>
+            <field name="deleteusergroups" type="CTUserGroup" default="8" label="Who may delete records"
+                   description="Select a user group that may delete records."/>
+
+
+            <field type="eseditlayout" name="eseditlayout" default="" label="Edit Layout"
+                   description="Select Edit Layout"/>
+
+            <field type="list" name="publishstatus" default="1" label="Publish" description="">
+                <option value="1">Published</option>
+                <option value="0">Not Published</option>
+            </field>
+
+
+            <field type="text" name="returnto" default="" size="70" label="Custom Return To"
+                   description="Visitor will be redirected to this link when form is completed. Active value (may include value(s) of field(s) use [fieldname] to get the value) "/>
+
+            <field type="list" name="guestcanaddnew" default="0" label="Guest can add new records"
+                   description="Enable this if you making Contact Us form or something publicly available. Do not forget to use Captcha in that case.">
+                <option value="1">Guest can add new records</option>
+                <option value="0">Only registered can add new records</option>
+            </field>
+
+
+            <field type="text" name="requiredlabel" filter="raw" default="" size="70" label="Required Label"
+                   description="Character or a text to show next to required field if there is one."/>
+
+
+            <field type="text" name="msgitemissaved" default="" size="70" label="Record Saved Message"
+                   description="This message will show up on the record being saved."/>
+
+            <field type="list" name="onrecordaddsendemail" default="0" label="Send Email When record" description="">
+                <option value="1">Added</option>
+                <option value="2">Saved</option>
+                <option value="3">On Conditions (Works on refresh too)</option>
+                <option value="0">Do not send</option>
+            </field>
+
+            <field type="text" name="sendemailcondition" default="" size="50" label="Send Email Condition"
+                   description="Example (That's PHP syntax): approved==1 or name==ivan"/>
+
+
+            <field type="text" name="onrecordaddsendemailto" default="" size="50" label="On Record Add Send Email to"
+                   description="The email with the data filled in the form will be sent to this email. More than one email is ok. Separate them with the comma.
+						
+						Also you may use a value of the field of the table to send an email to.
+						To have your own Email Subject please type : after email and then the subject.
+						Example 1: [email]
+						Example 2: test@yahoo.com,test@gmail.com,[email]
+						Example 3: [email]:Thank you for participation
+				"/>
+
+            <field type="text" name="onrecordsavesendemailto" default="" size="50" label="On Record Edit Send Email to"
+                   description="The email with the data filled in the form will be sent to this email. More than one email is ok. Separate them with the comma.
+						
+						Also you may use a value of the field of the table to send an email to.
+						To have your own Email Subject please type : after email and then the subject.
+						Example 1: [email]
+						Example 2: test@yahoo.com,test@gmail.com,[email]
+						Example 3: [email]:Thank you for participation
+				"/>
+
+
+            <field type="esemaillayout" name="onrecordaddsendemaillayout" default="" label="Email Layout"
+                   description="Email Layout"/>
+
+            <field type="string" name="emailsentstatusfield" default="" label="Email Sent Status Field"
+                   description="Field Name where to save the email sending status. Should be int or checkbox type. 1- sent, 0- not sent."/>
+
+
+        </fieldset>
+
+
+        <fieldset name="SHOPPING_CART">
+            <field type="list" name="showcartitemsonly" default="0" label="Shopping Cart Only"
+                   description="Show Items in the Shopping Cart Only">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </field>
+
+            <field type="text" name="cart_returnto" default="" size="50" label="Cart Updated Return To" description=""/>
+            <field type="text" name="cart_msgitemadded" default="" size="50" label="Message: Cart: Item Added"
+                   description=""/>
+            <field type="text" name="cart_msgitemdeleted" default="" size="50" label="Message: Cart: Item Deleted"
+                   description=""/>
+            <field type="text" name="cart_msgitemupdated" default="" size="50" label="Message: Cart: Updated"
+                   description=""/>
         </fieldset>
         
         <fieldset name="optional" addfieldpath="components/com_customtables/fields/">

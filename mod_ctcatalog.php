@@ -20,9 +20,8 @@ $path = JPATH_SITE . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 
 require_once($path.'loader.php');
 CTLoader();
 
-$ct = new CT;
-$ct->Env->moduleId = $module->id;
+$ct = new CT($params, true, $module->id);
 
-$ctCatalog = new Catalog($ct, $params); //$params is the parameter passed by joomla to the module, it contains module settings
+$ctCatalog = new Catalog($ct); //$params is the parameter passed by joomla to the module, it contains module settings
 
 echo $ctCatalog->render();
