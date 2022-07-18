@@ -2,13 +2,14 @@
 
 <extension type="module" version="3.0.0" client="site"  method="upgrade">
     <name>Custom Tables - Catalog</name>
-    <author>Ivan Komlev</author>
-    <creationDate>June 2022</creationDate>
+
+    <author>JoomlaBoat.com</author>
+    <creationDate>July 2022</creationDate>
     <copyright>Copyright (C) 2018-2022 Ivan Komlev. All rights reserved.</copyright>
     <license>GNU General Public License</license>
     <authorEmail>support@joomlaboat.com</authorEmail>
-    <authorUrl>http://www.joomlaboat.com/</authorUrl>
-    <version>2.7.9</version>
+    <authorUrl>https://www.joomlaboat.com/</authorUrl>
+    <version>2.8.2</version>
     <description>A module to show catalog component in as a module</description>
     <files>
         <filename module="mod_ctcatalog">mod_ctcatalog.php</filename>
