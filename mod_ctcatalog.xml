@@ -4,12 +4,12 @@
     <name>Custom Tables - Catalog</name>
 
     <author>JoomlaBoat.com</author>
-    <creationDate>November 2022</creationDate>
+    <creationDate>December 2022</creationDate>
     <copyright>Copyright (C) 2018-2022 Ivan Komlev. All rights reserved.</copyright>
     <license>GNU General Public License</license>
     <authorEmail>support@joomlaboat.com</authorEmail>
     <authorUrl>https://www.joomlaboat.com/</authorUrl>
-    <version>2.9.9</version>
+    <version>3.0.0</version>
     <description>A module to show catalog component in as a module</description>
     <files>
         <filename module="mod_ctcatalog">mod_ctcatalog.php</filename>
