@@ -4,7 +4,7 @@
  * @package mod_ctcatalog.php
  * @author Ivan Komlev <support@joomlaboat.com>
  * @link http://www.joomlaboat.com
- * @copyright (C) 2018-2022 Ivan Komlev
+ * @copyright (C) 2018-2023 Ivan Komlev
  * @license GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
  **/
 
