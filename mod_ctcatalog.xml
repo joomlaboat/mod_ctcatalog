@@ -3,12 +3,12 @@
 <extension type="module" version="3.0.0" client="site"  method="upgrade">
     <name>Custom Tables - Catalog</name>
     <author>JoomlaBoat.com</author>
-    <creationDate>November 2023</creationDate>
-    <copyright>Copyright (C) 2018-2023 Ivan Komlev. All rights reserved.</copyright>
+    <creationDate>January 2024</creationDate>
+    <copyright>Copyright (C) 2018-2024 Ivan Komlev. All rights reserved.</copyright>
     <license>GNU General Public License</license>
     <authorEmail>support@joomlaboat.com</authorEmail>
     <authorUrl>https://www.joomlaboat.com/</authorUrl>
-    <version>3.1.9</version>
+    <version>3.2.2</version>
     <description>A module to show catalog component in as a module</description>
     <files>
         <filename module="mod_ctcatalog">mod_ctcatalog.php</filename>
@@ -17,14 +17,14 @@
   	<config>
 	<fields name="params" addfieldpath="/components/com_customtables/fields">
 		<fieldset name="basic" addfieldpath="components/com_customtables/fields/">
-			<field type="estable" name="establename" default="" label="Select Table" description="Select Listing Table" />
-			<field type="escataloglayout" name="ct_pagelayout" default="" label="Page Layout" description="Select Page Layout" />
-			<field type="esitemlayout" name="ct_itemlayout" default="" label="Item Layout" description="Select Item Layout" />
-            <field type="eseditlayout" name="eseditlayout" default="" label="Edit Layout" description="Select Edit Layout" />
-			<field type="esdetailslayout" name="esdetailslayout" default="" label="Details Layout" description="Select Record Details Layout" />
+			<field type="CTTable" name="establename" default="" label="Select Table" description="Select Listing Table" />
+			<field type="CTCatalogLayout" name="ct_pagelayout" default="" label="Page Layout" description="Select Page Layout" />
+			<field type="CTItemLayout" name="ct_itemlayout" default="" label="Item Layout" description="Select Item Layout" />
+            <field type="CTEditLayout" name="eseditlayout" default="" label="Edit Layout" description="Select Edit Layout" />
+			<field type="CTDetailsLayout" name="esdetailslayout" default="" label="Details Layout" description="Select Record Details Layout" />
 		</fieldset>
 
-        <fieldset name="FILTERS">
+        <fieldset name="FILTERS" label="COM_MODULES_FILTER_FIELDSET_LABEL">
             <field type="text" name="filter" filter="raw" default="" label="Search Parameter"
                    description="
 		field to search in = (or &#60; or &#60;= or &#62; or &#62;= or != and == 'exact match')
@@ -173,7 +173,7 @@ In this case, there will be two checks: the first one will check if the record b
 
         </fieldset>
 
-        <fieldset name="SHOPPING_CART">
+        <fieldset name="SHOPPING_CART" label="COM_MODULES_SHOPPINGCART_FIELDSET_LABEL">
             <field type="list" name="showcartitemsonly" default="0" label="Shopping Cart Only"
                    description="Show Items in the Shopping Cart Only">
                 <option value="1">Yes</option>
