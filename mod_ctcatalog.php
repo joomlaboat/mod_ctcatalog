@@ -18,7 +18,7 @@ $path = JPATH_SITE . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 
 	. DIRECTORY_SEPARATOR . 'libraries' . DIRECTORY_SEPARATOR . 'customtables' . DIRECTORY_SEPARATOR;
 
 require_once($path.'loader.php');
-CTLoader();
+CustomTablesLoader();
 
 $ct = new CT($params, true, $module->id);
 
