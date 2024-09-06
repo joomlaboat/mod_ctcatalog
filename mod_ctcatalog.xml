@@ -3,12 +3,12 @@
 <extension type="module" client="site" method="upgrade">
     <name>Custom Tables - Catalog</name>
     <author>JoomlaBoat.com</author>
-    <creationDate>July 2024</creationDate>
+    <creationDate>September 2024</creationDate>
     <copyright>Copyright (C) 2018-2024 Ivan Komlev. All rights reserved.</copyright>
     <license>GNU General Public License</license>
     <authorEmail>support@joomlaboat.com</authorEmail>
     <authorUrl>https://www.joomlaboat.com/</authorUrl>
-    <version>3.3.6</version>
+    <version>3.4.0</version>
     <description>A module to show catalog component in as a module</description>
     <files>
         <filename module="mod_ctcatalog">mod_ctcatalog.php</filename>
@@ -225,5 +225,3 @@ In this case, there will be two checks: the first one will check if the record b
     </languages>
 
 </extension>
-		
-
