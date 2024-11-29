@@ -3,12 +3,12 @@
 <extension type="module" client="site" method="upgrade">
     <name>Custom Tables - Catalog</name>
     <author>JoomlaBoat.com</author>
-    <creationDate>September 2024</creationDate>
+    <creationDate>November 2024</creationDate>
     <copyright>Copyright (C) 2018-2024 Ivan Komlev. All rights reserved.</copyright>
     <license>GNU General Public License</license>
     <authorEmail>support@joomlaboat.com</authorEmail>
     <authorUrl>https://www.joomlaboat.com/</authorUrl>
-    <version>3.4.1</version>
+    <version>3.4.6</version>
     <description>A module to show catalog component in as a module</description>
     <files>
         <filename module="mod_ctcatalog">mod_ctcatalog.php</filename>
@@ -18,26 +18,28 @@
         <fields name="params" addfieldpath="/components/com_customtables/fields">
             <fieldset name="basic" addfieldpath="components/com_customtables/fields/">
                 <field type="CTTable" name="establename" default="" label="Select Table"
-                       description="Select Listing Table"/>
+                       description="Select a table from your Custom Tables list that will be used to display records"/>
                 <field type="CTCatalogLayout" name="ct_pagelayout" default="" label="Page Layout"
-                       description="Select Page Layout"/>
+                       description="Select a layout template for displaying the list of records"/>
                 <field type="CTItemLayout" name="ct_itemlayout" default="" label="Item Layout"
-                       description="Select Item Layout"/>
+                       description="Select a layout template for displaying individual records"/>
                 <field type="CTEditLayout" name="eseditlayout" default="" label="Edit Layout"
-                       description="Select Edit Layout"/>
+                       description="Select a layout template for the record editing form"/>
                 <field type="CTDetailsLayout" name="esdetailslayout" default="" label="Details Layout"
-                       description="Select Record Details Layout"/>
+                       description="Select a layout template for displaying detailed record information"/>
             </fieldset>
 
             <fieldset name="FILTERS" label="COM_MODULES_FILTER_FIELDSET_LABEL">
                 <field type="text" name="filter" filter="raw" default="" label="Search Parameter"
-                       description="
-		field to search in = (or &#60; or &#60;= or &#62; or &#62;= or != and == 'exact match')
-		value (or Twig tag as {{ user.id }} for example ) to have more then one equation use AND, OR
-		to get value from the URL query add '$get_' to parameter name, example 'username=$get_user' this will read value 'user' from url query.
-To get current date use {{ 'now'|date('m/d/Y') }} or {{ 'now'|date('Y') }} for the year or {{ 'now'|date('m') }} for the month. Also you can format the date using MySql date_format() format specifiers, example 1: {now:%m}.
-Example 2: 'birthdate:%m%d DESC' to get the month and the day of the field value.
-"/>
+                       description="Syntax: field_name operator value
+
+Operators available: =, &#60;, &#60;=, &#62;, &#62;=, !=, == (exact match)
+Examples:
+- Simple filter: username=john
+- URL parameter: username=$get_user
+- Date filter: date={{ 'now'|date('Y-m-d') }}
+- Multiple conditions: age>18 AND status='active'
+- Format date parts: birthdate:%m%d"/>
                 <field type="list" name="showpublished" default="0" label="Show published records" description="">
                     <option value="0">Show Published Only</option>
                     <option value="1">Show Unpublished Only</option>
@@ -45,25 +47,24 @@ Example 2: 'birthdate:%m%d DESC' to get the month and the day of the field value
                 </field>
 
                 <field type="text" name="useridfield" default="" label="COM_CUSTOMTABLES_MENU_CUSTOM_USERID_FIELD"
-                       description="
-User type field name - to check if a record belongs to a current user. The table must contain the user type field.
-There is the option to find out if a record belongs to a current user through parent tables.
-Syntax example: 'user or parents(children).user'.
-In this case, there will be two checks: the first one will check if the record belongs to the current user and the second one will check if the record belongs to any parent record
- that belongs to the current user. At least one check must be positive."/>
+                       description="Specify which field contains the user ID to filter records by ownership.
+Examples:
+- Simple: 'user_id'
+- With parent check: 'user_id or parents(children).user_id'
+Will show records owned by current user or where parent record is owned by current user."/>
 
                 <field type="text" name="recordstable" default="" label="User Join Table"
-                       description="Table that contains records user ids"/>
+                       description="Specify the table that contains the relationship between users and records"/>
                 <field type="text" name="recordsuseridfield" default="" label="User Join User ID Field"
-                       description="Field that contains user id"/>
+                       description="Specify the field in the join table that contains the user ID reference"/>
                 <field type="text" name="recordsfield" default="" label="User Join Field"
-                       description="Field that contains records user ids"/>
+                       description="Specify the field that links records between the main table and join table"/>
                 <field type="text" name="groupby" default="" label="Group By"
-                       description="Field name to group results by"/>
+                       description="Specify field(s) to group results by. Examples: category, status, DATE(created_date)"/>
                 <field type="text" name="sortby" default="" label="Default sort by field"
-                       description="Type field name to sort by and the order. Example 1: title desc Example 2: title asc. Note that keyword asc is not necessary."/>
+                       description="Specify the default sorting. Examples: title ASC, date DESC, name. 'ASC' is optional for ascending order"/>
                 <field type="text" name="forcesortby" default="" label="Forced sort by field"
-                       description="Type field name to sort by and the order. Example 1: title desc Example 2: title asc. Note that keyword asc is not necessary. Also, you may add MySql date_format() format specifiers. Example: 'birthdate:%m%d DESC' to sort by month and day. You can also use _id to sort by recird ID or _published to sort by Publish State"/>
+                       description="Specify mandatory sorting that users cannot override. Special fields: _id (record ID), _published (publish state). Example: DATE_FORMAT(birthdate,'%m%d') DESC"/>
                 <field type="text" name="limit" default="0" label="Limit number of records per page" description=""/>
             </fieldset>
 
@@ -98,13 +99,13 @@ In this case, there will be two checks: the first one will check if the record b
                     description="Save Record Action."
             >
                 <field type="text" name="returnto" default="" size="70" label="Custom Return To"
-                       description="Visitor will be redirected to this link when form is completed. Active value (may include value(s) of field(s) use [fieldname] to get the value) "/>
+                       description="Specify the URL to redirect after form submission. Use [fieldname] to include field values. Examples: /thank-you, /order/[order_id]/complete"/>
 
                 <field type="text" name="msgitemissaved" default="" size="70" label="Record Saved Message"
-                       description="This message will show up on the record being saved."/>
+                       description="Message to display after successfully saving a record"/>
 
                 <field type="text" name="requiredlabel" filter="raw" default="" size="70" label="Required Label"
-                       description="Character or a text to show next to required field if there is one."/>
+                       description="Symbol or text to mark required fields. Example: *, (Required), etc."/>
 
             </fieldset>
 
@@ -151,7 +152,7 @@ In this case, there will be two checks: the first one will check if the record b
 "/>
 
                 <field type="text" name="sendemailcondition" default="" size="50" label="Conditions for Sending Email"
-                       description="Specify conditions for triggering the 'Record Saved' event. For example (using PHP syntax): 'approved=1 OR name=='Mark'"/>
+                       description="Define conditions for sending emails. Examples: status='approved', amount>1000. Uses PHP comparison syntax"/>
 
                 <field type="string" name="emailsentstatusfield" default="" label="Field for Email Sent Status"
                        description="Designate a field to track the status of email sending. This field should be of type 'integer' or 'checkbox'. '1' represents sent, '0' represents not sent."/>
