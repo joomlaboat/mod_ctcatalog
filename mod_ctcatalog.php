@@ -21,9 +21,11 @@ $path = JPATH_SITE . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 
 require_once($path.'loader.php');
 CustomTablesLoader();
 
-$params_array = Params::menuParamsRegistry2Array($params);
+//$params_array = Params::menuParamsRegistry2Array($params);
 
-$ct = new CT($params_array, true, $module->id);
+//$ct = new CT($params_array, true, $module->id);
+$ct = new CT([], true);
+$ct->Params->constructJoomlaParams($module->id);
 
 $ctCatalog = new Catalog($ct); //$params is the parameter passed by joomla to the module, it contains module settings
 
