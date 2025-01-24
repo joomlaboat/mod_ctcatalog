@@ -16,6 +16,7 @@ use CustomTables\Catalog;
 use CustomTables\Params;
 use CustomTables\common;
 use Joomla\CMS\Factory;
+use Joomla\Registry\Registry;
 
 $path = JPATH_SITE . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_customtables' 
 	. DIRECTORY_SEPARATOR . 'libraries' . DIRECTORY_SEPARATOR . 'customtables' . DIRECTORY_SEPARATOR;
@@ -24,8 +25,11 @@ require_once($path.'loader.php');
 CustomTablesLoader();
 
 $ct = new CT([], true);
-
-$ct->Params->constructJoomlaParams($module->id);
+$menu_params = new Registry;//Joomla Specific
+$menu_params->loadString($module->params);
+$menu_paramsArray = Params::menuParamsRegistry2Array($menu_params);
+$ct->Params->setParams($menu_paramsArray);
+$ct->Params->ModuleId = $module->id;
 
 $ctCatalog = new Catalog($ct); //$params is the parameter passed by joomla to the module, it contains module settings
 $result = $ctCatalog->render();
