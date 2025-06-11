@@ -171,6 +171,12 @@ Will show records owned by current user or where parent record is owned by curre
                 <field type="text" name="forceitemid" default="0" label="Force Itemid"
                        description="Used to set parameters for edit form etc."/>
 
+                <field type="radio" name="applyurlqueryparameters" default="0" label="Apply URL Query Parameters"
+                       description="Enable this option to allow the module to interpret URL query parameters such as 'where', 'order', 'start', etc. This is useful for supporting features like search, filtering, or pagination via the URL." class="btn-group btn-group-yesno">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </field>
+
             </fieldset>
 
             <fieldset name="SHOPPING_CART" label="COM_MODULES_SHOPPINGCART_FIELDSET_LABEL">
